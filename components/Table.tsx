@@ -27,23 +27,25 @@ const Table = () => {
   }, []);
 
   return (
-    <table className="min-w-full table-auto">
-      <thead>
-        <tr>
-          <th className="px-16 py-2">Pic</th>
-          <th className="px-16 py-2">FullName</th>
-          <th className="px-16 py-2">Phone</th>
-          <th className="px-16 py-2">Email</th>
-          <th className="px-16 py-2">Gender</th>
-          <th className="px-16 py-2">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {contacts.map((contact, index) => (
-          <ContactRow key={index} contact={contact} />
-        ))}
-      </tbody>
-    </table>
+    <div style={{ maxHeight: "300px", overflowX: "auto" }}>
+      <table className="min-w-full table-auto">
+        <thead className="sticky top-0 bg-white">
+          <tr>
+            <th className="px-16 py-2">Pic</th>
+            <th className="px-16 py-2">FullName</th>
+            <th className="px-16 py-2">Phone</th>
+            <th className="px-16 py-2">Email</th>
+            <th className="px-16 py-2">Gender</th>
+            <th className="px-16 py-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody className="">
+          {contacts.map((contact, index) => (
+            <ContactRow key={index} contact={contact} />
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
@@ -52,16 +54,16 @@ function ContactRow({ contact }: { contact: Contact }) {
 
   return (
     <tr className="text-center">
-      <td className="px-16 py-2 flex flex-row items-center">
+      <td className="px-8 py-2 flex flex-row items-center">
         {/* Display contact picture here */}
         <img src="#" alt="" />
       </td>
-      <td className="px-16 py-2">{contact.fullName || "Unknown"}</td>
-      <td className="px-16 py-2">{contact.phoneNumber || "Unknown"}</td>
-      <td className="px-16 py-2">{contact.email || "Unknown"}</td>
-      <td className="px-16 py-2">{contact.gender || "Unknown"}</td>
-      <td className="px-16 py-2">
-        <div className="flex items-center justify-center">
+      <td className="px-8 py-2">{contact.fullName || "Unknown"}</td>
+      <td className="px-8 py-2">{contact.phoneNumber || "Unknown"}</td>
+      <td className="px-8 py-2">{contact.email || "Unknown"}</td>
+      <td className="px-8 py-2">{contact.gender || "Unknown"}</td>
+      <td className="px-8 py-2">
+        <div className="flex items-center justify-center gap-1">
           <>
             <button
               className="bg-transparent text-main px-4 py-2 border rounded-md"
