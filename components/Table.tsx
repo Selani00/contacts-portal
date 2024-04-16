@@ -1,26 +1,25 @@
-'use client'
-import React, { useState,useEffect } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import { FaPen, FaTrash } from "react-icons/fa";
-import PopUp from '../components/PopUp';
+import PopUp from "../components/PopUp";
 import { Contact } from "@/model/contact.model";
 
 const Table = () => {
-
   const [contacts, setContacts] = useState<Contact[]>([]);
 
   useEffect(() => {
     const fetchContacts = async () => {
       try {
         const response = await fetch(`http://localhost:5000/contact/`, {
-          method: 'GET',
+          method: "GET",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         });
         const data = await response.json();
         setContacts(data);
       } catch (error) {
-        console.error('Error fetching users:', error);
+        console.error("Error fetching users:", error);
       }
     };
 
@@ -40,7 +39,7 @@ const Table = () => {
         </tr>
       </thead>
       <tbody>
-      {contacts.map((contact, index) => (
+        {contacts.map((contact, index) => (
           <ContactRow key={index} contact={contact} />
         ))}
       </tbody>
@@ -62,21 +61,28 @@ function ContactRow({ contact }: { contact: Contact }) {
       <td className="px-16 py-2">{contact.email || "Unknown"}</td>
       <td className="px-16 py-2">{contact.gender || "Unknown"}</td>
       <td className="px-16 py-2">
-        <>
-          <button className="bg-transparent text-main px-4 py-2 border rounded-md" onClick={() => setShowModal(true)}>
-            <FaPen />
-          </button>
-          <PopUp isVisible={showModal} onClose={() => setShowModal(false)}>
-            <div>
-              <h3>Do you want to delete the contact?</h3>
-              <button>Yes</button>
-              <button onClick={() => setShowModal(false)}>Cancel</button>
-            </div>
-          </PopUp>
-          <button className="bg-transparent text-main px-4 py-2 border rounded-md">
-            <FaTrash />
-          </button>
-        </>
+        <div className="flex items-center justify-center">
+          <>
+            <button
+              className="bg-transparent text-main px-4 py-2 border rounded-md"
+              onClick={() => setShowModal(true)}
+            >
+              <FaPen />
+            </button>
+            <PopUp isVisible={showModal} onClose={() => setShowModal(false)}>
+              <div>
+                <h3>Do you want to delete the contact?</h3>
+                <button>Yes</button>
+                <button onClick={() => setShowModal(false)}>Cancel</button>
+              </div>
+            </PopUp>
+          </>
+          <>
+            <button className="bg-transparent text-main px-4 py-2 border rounded-md">
+              <FaTrash />
+            </button>
+          </>
+        </div>
       </td>
     </tr>
   );
